@@ -20,11 +20,11 @@ public class Proceso {
 	
 	@Override
 	public String toString() {
-		String hora ="Hora"+horaAsignada.get(Calendar.HOUR_OF_DAY);
-		String minutos ="Minutos"+ horaAsignada.get(Calendar.MINUTE);
-		String completo = hora +";"+ minutos;
-		return "Proceso [tiempoEsperado=" + tiempoEsperado + ", nombre=" + nombre + ", turno=" + turno
-				+ ", horaAsignada=" + completo +"]";
+		String hora ="Hora: "+horaAsignada.get(Calendar.HOUR_OF_DAY);
+		String minutos = horaAsignada.get(Calendar.MINUTE) + " Minutos";
+		String completo = hora +":"+ minutos;
+		return "Proceso [tiempoEsperado= " + tiempoEsperado + ", nombre= " + nombre + ", turno= " + turno
+				+ ", horaAsignada= " + completo +"]";
 	}
 
 

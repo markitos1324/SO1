@@ -40,10 +40,11 @@ public class Controller {
 			int tiempoGastado = ProbabilidadDeCambio(proceso); //aqui hacemos un calculo para determinar cuanto gasto al final el proceso
 			if (tiempoGastado <= proceso.getTiempoEsperado()) { //Aqui se elige el caso cuando el proceso tarda menos o igual al tiempo esperado
 				Thread.sleep(proceso.getTiempoEsperado()*1000); // apesar de que tarde menos el tiempo de espera seguira siendo el mismo
-				System.out.println( (tiempoGastado < proceso.getTiempoEsperado()) ? "Felicidades el programa gasto menos de lo que debia, el proceso tardo:" + tiempoGastado + " seg \nTotal de tiempo Gastado: " + proceso.getTiempoEsperado() + " Min": "Total de tiempo Gastado: " + tiempoGastado + " Min");
+				System.out.println( (tiempoGastado < proceso.getTiempoEsperado()) ? "Felicidades el programa gasto menos de lo que debia, el proceso tardo:" + tiempoGastado + " min \nTotal de tiempo Gastado: " + proceso.getTiempoEsperado() + " Min": "Total de tiempo Gastado: " + tiempoGastado + " Min");
 				totalTiempo += proceso.getTiempoEsperado();
 			}else { // para el caso en el que tarde mas hay si el tiempo aumenta
 				Thread.sleep(tiempoGastado*1000); // se refleja el aumento de tiempo del proceso
+				System.out.println("El programa demoro mas de lo esperado");
 				System.out.println("Total de tiempo Gastado: " + tiempoGastado + " min");
 				totalTiempo += tiempoGastado;
 			}
@@ -66,7 +67,7 @@ public class Controller {
 		
 		System.out.println(aleatoreo);
 		if (aleatoreo>33 && aleatoreo <=66) {
-			return (int) (proceso.getTiempoEsperado() - minmaxominmenos );// aqui se le restan los minutos dependiendo de la probabilidad con un muero aleatorio entre 1 y 60
+			return (int) (proceso.getTiempoEsperado() - minmaxominmenos );// aqui se le restan los minutos dependiendo de la probabilidad con un numero aleatorio entre 1 y 60
 		}else if (aleatoreo < 33) {
 			return (int) (proceso.getTiempoEsperado() + minmaxominmenos );// aqui se le suman los min dependiendo de la probabilidad
 		}else{
