@@ -1,14 +1,32 @@
 package model;
 
+import java.util.Calendar;
+
 public class Proceso {
 
-	private int tiempoEsperado; //Tiempo en el que el proceso deberia de terminar
+	private int tiempoEsperado; //Tiempo en el que el proceso deberia de terminar en min
 	private String nombre;
+	private String turno;
+	private Calendar horaAsignada;
 	
-	public Proceso(int tiempoEjecucion, String nombre) {
+	public Proceso(int tiempoEjecucion, String nombre,String turno, Calendar horaAsignada) {
 		this.tiempoEsperado = tiempoEjecucion;
 		this.nombre = nombre;
+		this.turno = turno;
+		this.horaAsignada = horaAsignada;
 	}
+
+	
+	
+	@Override
+	public String toString() {
+		String hora ="Hora"+horaAsignada.get(Calendar.HOUR_OF_DAY);
+		String minutos ="Minutos"+ horaAsignada.get(Calendar.MINUTE);
+		String completo = hora +";"+ minutos;
+		return "Proceso [tiempoEsperado=" + tiempoEsperado + ", nombre=" + nombre + ", turno=" + turno
+				+ ", horaAsignada=" + completo +"]";
+	}
+
 
 	public int getTiempoEsperado() {
 		return tiempoEsperado;
@@ -17,10 +35,33 @@ public class Proceso {
 	public String getNombre() {
 		return nombre;
 	}
-	
-	@Override
-	public String toString() {
-		return "Tiempo Esperado: " + tiempoEsperado + ", Nombre: " + nombre;
+
+	public String getTurno() {
+		return turno;
 	}
 
+	public void setTurno(String turno) {
+		this.turno = turno;
+	}
+
+
+	public Calendar getHoraAsignada() {
+		return horaAsignada;
+	}
+
+
+	public void setHoraAsignada(Calendar horaAsignada) {
+		this.horaAsignada = horaAsignada;
+	}
+
+
+	public void setTiempoEsperado(int tiempoEsperado) {
+		this.tiempoEsperado = tiempoEsperado;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	
 }
