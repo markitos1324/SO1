@@ -4,23 +4,78 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 import model.Proceso;
+import model.ProcesoLote;
 
 public class Controller {
 
 	private ArrayList<Proceso> procesos;
-	
+	private ArrayList<ProcesoLote> procesoLotes;
 	public Controller() {
 		procesos = new ArrayList<>();
-		
+		procesoLotes = new  ArrayList<>();
 		procesos.add(new Proceso(60, "Cocinar","1",new GregorianCalendar(0, 0, 0, 8, 0, 0)));
 		procesos.add(new Proceso(60, "lavar","2",new GregorianCalendar(0, 0, 0, 9, 0, 0)));
 		procesos.add(new Proceso(60, "peinar", "3",new GregorianCalendar(0, 0, 0, 10, 0, 0)));
+		
+		procesoLotes.add(new ProcesoLote("peinar",10));
+		procesoLotes.add(new ProcesoLote("Cocinar",5));
+		procesoLotes.add(new ProcesoLote("lavar",20));
+		procesoLotes.add(new ProcesoLote("tejer",40));
+		procesoLotes.add(new ProcesoLote("colgar",80));
+		procesoLotes.add(new ProcesoLote("minar",160));
+		procesoLotes.add(new ProcesoLote("vagear",320));
+		
+		EjecucionProcesosLote(procesoLotes);
+		/*
 		try {
-			EjecucionProcesos(procesos);
+			EjecucionProcesosSerie(procesos);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/
+	}
+	
+	/**
+	 * Metodo encargado de hacer los procesos por lotes en donde ejecuta
+	 * todos los procesos y va ejecuntando cada uno  mostrando el proceso y
+	 * la accion en la que va adicionalmente al final imprime la duracion
+	 * total del proceso
+	 * @param procesoLotes
+	 */
+	public void EjecucionProcesosLote(ArrayList<ProcesoLote> procesoLotes) {
+		for (ProcesoLote procesoLote : procesoLotes) {
+			procesoLote.start(); // Ejecuta todos los hilos iniciando los procesos
+		}
+		for (ProcesoLote procesoLote : procesoLotes) {
+			procesoLote.join(); // Espera a que todos los hilos finalicen
+		}
+		System.out.println("------------------------------------");
+		System.out.println("El tiempo total de ejecucion es: " + TiempoTotalEjecucion());
+	}
+	
+	/**
+	 * Metodo encargado de darnos el tiempo total de ejecucion dandonos
+	 * el tiempo total de todas las ejecuciones
+	 * @return
+	 */
+	private String TiempoTotalEjecucion() {
+		int min = 0, sec = 0, milisec = 0;
+		for (ProcesoLote procesoLote : procesoLotes) {
+			String[] tiempo = procesoLote.getTotalTime().split(":");
+			min += Integer.parseInt(tiempo[0]);
+			sec += Integer.parseInt(tiempo[1]);
+			milisec += Integer.parseInt(tiempo[2]);
+			if (milisec >= 1000) {
+				milisec = milisec - 1000;
+				sec++;
+			}else if (sec >= 60) {
+				sec = sec - 60;
+				min++;
+			}
+		}
+		
+		return min + ":" + sec + ":" + milisec;
 	}
 	
 	/**
@@ -30,7 +85,7 @@ public class Controller {
 	 * @param lista de procesos a ejecutar
 	 * @throws InterruptedException
 	 */
-	public void EjecucionProcesos(ArrayList<Proceso> procesosAñadidos) throws InterruptedException{
+	public void EjecucionProcesosSerie(ArrayList<Proceso> procesosAñadidos) throws InterruptedException{
 		System.out.println("Ejecutando....");
 		int totalTiempo = 0, totalEstimado = 0;
 		for (Proceso proceso : procesosAñadidos) {

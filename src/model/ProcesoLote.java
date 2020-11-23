@@ -1,68 +1,58 @@
 package model;
 
-import java.util.Calendar;
-
 public class ProcesoLote extends MyThread{
 
-	private int tiempoEsperado; //Tiempo en el que el proceso deberia de terminar en min
 	private String nombre;
-	private String turno;
-	private Calendar horaAsignada;
+	private int numeroAcciones;
+
+	private Cronometro cronometro;
 	
-	public ProcesoLote(int tiempoEjecucion, String nombre,String turno, Calendar horaAsignada) {
-		this.tiempoEsperado = tiempoEjecucion;
+	public ProcesoLote(String nombre, int numeroAcciones) {
 		this.nombre = nombre;
-		this.turno = turno;
-		this.horaAsignada = horaAsignada;
+		this.numeroAcciones = numeroAcciones;
+		this.cronometro = new Cronometro();
 	}
 
+	/**
+	 * metodo encargado del hilo del proceso iniciando desde la primera
+	 * accion y va avanzando hasta terminar el total de acciones
+	 */
 	@Override
 	void executeTask() {
-		// TODO Auto-generated method stub
-		System.out.println("Acabron que soy un hilo mamalon");
+		System.out.println("Inicia proceso: " + nombre);
+		cronometro.start(); // Un cronometro para ir teniendo una idea del tiempo que duro
+		for (int i = 0; i < numeroAcciones; i++) {
+			System.out.println("Nombre: " + nombre + ". Accion numero: " + i);
+			try {
+				Thread.sleep(100); // Una pausa para evitar que mi pc lo acabe en 80 milisegundos :'(
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		cronometro.stop();
+		System.out.println("Terminando proceso: " + nombre + ". Total de Tiempo: " + cronometro.getTotalTime());
+		stop();
 	}
 	
 	@Override
 	public String toString() {
-		String hora ="Hora: "+horaAsignada.get(Calendar.HOUR_OF_DAY);
-		String minutos = horaAsignada.get(Calendar.MINUTE) + " Minutos";
-		String completo = hora +":"+ minutos;
-		return "Proceso [tiempoEsperado= " + tiempoEsperado + ", nombre= " + nombre + ", turno= " + turno
-				+ ", horaAsignada= " + completo +"]";
+		return "ProcesoLote [nombre=" + nombre + ", numeroAcciones=" + numeroAcciones + "]";
 	}
 
-	public int getTiempoEsperado() {
-		return tiempoEsperado;
+	public String getTotalTime() {
+		return cronometro.getTotalTime();
 	}
-
+	
+	public int getTotalInMiliseconds() {
+		return cronometro.getTotalInMiliseconds();
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}
 
-	public String getTurno() {
-		return turno;
-	}
-
-	public void setTurno(String turno) {
-		this.turno = turno;
-	}
-
-
-	public Calendar getHoraAsignada() {
-		return horaAsignada;
-	}
-
-
-	public void setHoraAsignada(Calendar horaAsignada) {
-		this.horaAsignada = horaAsignada;
-	}
-
-
-	public void setTiempoEsperado(int tiempoEsperado) {
-		this.tiempoEsperado = tiempoEsperado;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public int getNumeroAcciones() {
+		return numeroAcciones;
 	}
 }

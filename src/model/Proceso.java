@@ -62,6 +62,4 @@ public class Proceso {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
-	
 }
