@@ -2,19 +2,18 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
-
 import model.Proceso;
 import model.ProcesoLote;
-import view.MainFrame;
+
 
 public class Controller {
 
 	private ArrayList<Proceso> procesos;
 	private ArrayList<ProcesoLote> procesoLotes;
-	public MainFrame mainFrame;
+	
 	
 	public Controller() {
-		mainFrame = new MainFrame();
+	
 		procesos = new ArrayList<>();
 		procesoLotes = new  ArrayList<>();
 		procesos.add(new Proceso(60, "Cocinar","1",new GregorianCalendar(0, 0, 0, 8, 0, 0)));
@@ -42,8 +41,8 @@ public class Controller {
 			e.printStackTrace();
 		}
 		*/
-		
-		
+
+	
 	}
 	
 	/**
