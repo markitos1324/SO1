@@ -5,12 +5,16 @@ import java.util.GregorianCalendar;
 
 import model.Proceso;
 import model.ProcesoLote;
+import view.MainFrame;
 
 public class Controller {
 
 	private ArrayList<Proceso> procesos;
 	private ArrayList<ProcesoLote> procesoLotes;
+	public MainFrame mainFrame;
+	
 	public Controller() {
+		mainFrame = new MainFrame();
 		procesos = new ArrayList<>();
 		procesoLotes = new  ArrayList<>();
 		procesos.add(new Proceso(60, "Cocinar","1",new GregorianCalendar(0, 0, 0, 8, 0, 0)));
@@ -23,10 +27,14 @@ public class Controller {
 		procesoLotes.add(new ProcesoLote("tejer",40));
 		procesoLotes.add(new ProcesoLote("colgar",80));
 		procesoLotes.add(new ProcesoLote("minar",160));
-		procesoLotes.add(new ProcesoLote("vagear",320));
+		procesoLotes.add(new ProcesoLote("ver tv",320));
 		
 		EjecucionProcesosLote(procesoLotes);
+		
+		
+		
 		/*
+		 * ejecucion de procesos en serie.
 		try {
 			EjecucionProcesosSerie(procesos);
 		} catch (InterruptedException e) {
@@ -34,6 +42,8 @@ public class Controller {
 			e.printStackTrace();
 		}
 		*/
+		
+		
 	}
 	
 	/**
