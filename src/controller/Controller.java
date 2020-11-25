@@ -34,6 +34,7 @@ public class Controller {
 			e.printStackTrace();
 		}
 		*/
+		System.exit(0); // Encargado de matar la ejecucion del hilo general de la aplicacion
 	}
 	
 	/**
