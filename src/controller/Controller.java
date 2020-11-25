@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import model.Proceso;
 import model.ProcesoLote;
+import view.MainFrame;
 
 
 public class Controller {
@@ -11,8 +12,14 @@ public class Controller {
 	private ArrayList<Proceso> procesos;
 	private ArrayList<ProcesoLote> procesoLotes;
 	
+	//___________ main frame_______________
+	
+	public MainFrame  mainFrame;
+	
+	
 	
 	public Controller() {
+		mainFrame = new MainFrame();
 	
 		procesos = new ArrayList<>();
 		procesoLotes = new  ArrayList<>();
