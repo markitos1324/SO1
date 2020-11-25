@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import model.Proceso;
 import model.ProcesoLote;
-//import view.MainFrame;
+import view.MainFrame;
 
 
 public class Controller {
@@ -14,12 +14,12 @@ public class Controller {
 	
 	//___________ main frame_______________
 	
-//	public MainFrame  mainFrame;
+	public MainFrame  mainFrame;
 	
 	
 	
 	public Controller() {
-//		mainFrame = new MainFrame();
+		mainFrame = new MainFrame();
 	
 		procesos = new ArrayList<>();
 		procesoLotes = new  ArrayList<>();
@@ -35,12 +35,12 @@ public class Controller {
 		procesoLotes.add(new ProcesoLote("minar",160));
 		procesoLotes.add(new ProcesoLote("ver tv",320));
 		
-		EjecucionProcesosLoteMono(procesoLotes);
+//		EjecucionProcesosLoteMono(procesoLotes);
 		EjecucionProcesosLoteMulti(procesoLotes);
-		
+
 		
 		/*
-		 * ejecucion de procesos en serie.
+		 //ejecucion de procesos en serie.
 		try {
 			EjecucionProcesosSerie(procesos);
 		} catch (InterruptedException e) {
