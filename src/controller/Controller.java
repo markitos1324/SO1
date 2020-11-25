@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import model.Proceso;
 import model.ProcesoLote;
-import view.MainFrame;
+//import view.MainFrame;
 
 
 public class Controller {
@@ -14,12 +14,12 @@ public class Controller {
 	
 	//___________ main frame_______________
 	
-	public MainFrame  mainFrame;
+//	public MainFrame  mainFrame;
 	
 	
 	
 	public Controller() {
-		mainFrame = new MainFrame();
+//		mainFrame = new MainFrame();
 	
 		procesos = new ArrayList<>();
 		procesoLotes = new  ArrayList<>();
@@ -35,8 +35,8 @@ public class Controller {
 		procesoLotes.add(new ProcesoLote("minar",160));
 		procesoLotes.add(new ProcesoLote("ver tv",320));
 		
-		EjecucionProcesosLote(procesoLotes);
-		
+		EjecucionProcesosLoteMono(procesoLotes);
+		EjecucionProcesosLoteMulti(procesoLotes);
 		
 		
 		/*
@@ -53,13 +53,29 @@ public class Controller {
 	}
 	
 	/**
-	 * Metodo encargado de hacer los procesos por lotes en donde ejecuta
+	 * Metodo encargado de hacer los procesos por lotes(MonoProgramacion) en donde ejecuta
 	 * todos los procesos y va ejecuntando cada uno  mostrando el proceso y
 	 * la accion en la que va adicionalmente al final imprime la duracion
 	 * total del proceso
 	 * @param procesoLotes
 	 */
-	public void EjecucionProcesosLote(ArrayList<ProcesoLote> procesoLotes) {
+	public void EjecucionProcesosLoteMono(ArrayList<ProcesoLote> procesoLotes) {
+		for (ProcesoLote procesoLote : procesoLotes) {
+			procesoLote.start(); // Ejecuta todos los hilos iniciando los procesos
+			procesoLote.join(); // Espera a que todos los hilos finalicen
+		}
+		System.out.println("------------------------------------");
+		System.out.println("El tiempo total de ejecucion es: " + TiempoTotalEjecucion());
+	}
+	
+	/**
+	 * Metodo encargado de hacer los procesos por lotes(MultiProgramacion) en donde ejecuta
+	 * todos los procesos y va ejecuntando cada uno  mostrando el proceso y
+	 * la accion en la que va adicionalmente al final imprime la duracion
+	 * total del proceso
+	 * @param procesoLotes
+	 */
+	public void EjecucionProcesosLoteMulti(ArrayList<ProcesoLote> procesoLotes) {
 		for (ProcesoLote procesoLote : procesoLotes) {
 			procesoLote.start(); // Ejecuta todos los hilos iniciando los procesos
 		}
