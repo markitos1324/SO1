@@ -2,14 +2,14 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import model.Proceso;
+import model.ProcesoSerie;
 import model.ProcesoLote;
 import view.MainFrame;
 
 
 public class Controller {
 
-	private ArrayList<Proceso> procesos;
+	private ArrayList<ProcesoSerie> procesos;
 	private ArrayList<ProcesoLote> procesoLotes;
 	
 	//___________ main frame_______________
@@ -23,9 +23,9 @@ public class Controller {
 	
 		procesos = new ArrayList<>();
 		procesoLotes = new  ArrayList<>();
-		procesos.add(new Proceso(60, "Cocinar","1",new GregorianCalendar(0, 0, 0, 8, 0, 0)));
-		procesos.add(new Proceso(60, "lavar","2",new GregorianCalendar(0, 0, 0, 9, 0, 0)));
-		procesos.add(new Proceso(60, "peinar", "3",new GregorianCalendar(0, 0, 0, 10, 0, 0)));
+		procesos.add(new ProcesoSerie(60, "Cocinar","1",new GregorianCalendar(0, 0, 0, 8, 0, 0)));
+		procesos.add(new ProcesoSerie(60, "lavar","2",new GregorianCalendar(0, 0, 0, 9, 0, 0)));
+		procesos.add(new ProcesoSerie(60, "peinar", "3",new GregorianCalendar(0, 0, 0, 10, 0, 0)));
 		
 		procesoLotes.add(new ProcesoLote("peinar",10));
 		procesoLotes.add(new ProcesoLote("Cocinar",5));
@@ -117,10 +117,10 @@ public class Controller {
 	 * @param lista de procesos a ejecutar
 	 * @throws InterruptedException
 	 */
-	public void EjecucionProcesosSerie(ArrayList<Proceso> procesosAñadidos) throws InterruptedException{
+	public void EjecucionProcesosSerie(ArrayList<ProcesoSerie> procesosAñadidos) throws InterruptedException{
 		System.out.println("Ejecutando....");
 		int totalTiempo = 0, totalEstimado = 0;
-		for (Proceso proceso : procesosAñadidos) {
+		for (ProcesoSerie proceso : procesosAñadidos) {
 			System.out.println("---------------------------------");
 			System.out.println(proceso.toString());
 			totalEstimado += proceso.getTiempoEsperado();
@@ -148,7 +148,7 @@ public class Controller {
 	 * @param proceso
 	 * @return
 	 */
-	private int ProbabilidadDeCambio(Proceso proceso) {
+	private int ProbabilidadDeCambio(ProcesoSerie proceso) {
 		int aleatoreo = (int) (Math.round(Math.random() * (101 - 1) + 1));
 		int minmaxominmenos = (int) (Math.round(Math.random() * (51 - 1) + 1));
 		

@@ -2,14 +2,14 @@ package model;
 
 import java.util.Calendar;
 
-public class Proceso {
+public class ProcesoSerie {
 
 	private int tiempoEsperado; //Tiempo en el que el proceso deberia de terminar en min
 	private String nombre;
 	private String turno;
 	private Calendar horaAsignada;
 	
-	public Proceso(int tiempoEjecucion, String nombre,String turno, Calendar horaAsignada) {
+	public ProcesoSerie(int tiempoEjecucion, String nombre,String turno, Calendar horaAsignada) {
 		this.tiempoEsperado = tiempoEjecucion;
 		this.nombre = nombre;
 		this.turno = turno;
