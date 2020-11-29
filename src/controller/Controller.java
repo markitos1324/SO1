@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import model.ProcesoSerie;
+import model.ProcesoCompartido;
 import model.ProcesoLote;
 import view.MainFrame;
 
@@ -36,8 +37,8 @@ public class Controller {
 		procesoLotes.add(new ProcesoLote("ver tv",320));
 		
 //		EjecucionProcesosLoteMono(procesoLotes);
-		EjecucionProcesosLoteMulti(procesoLotes);
-
+//		EjecucionProcesosLoteMulti(procesoLotes);
+		EjecucionProcesosTiempoCompartido(procesoLotes);
 		
 		/*
 		 //ejecucion de procesos en serie.
@@ -50,6 +51,20 @@ public class Controller {
 		*/
 
 	
+	}
+	
+	
+	/**
+	 * Metodo encargado de hacer los procesos por lotes(MultiProgramacion) en donde ejecuta
+	 * todos los procesos y va ejecuntando cada uno  mostrando el proceso y
+	 * la accion en la que va adicionalmente al final imprime la duracion
+	 * total del proceso
+	 * @param procesoLotes
+	 */
+	public void EjecucionProcesosTiempoCompartido(ArrayList<ProcesoLote> procesoLotes) {
+		ProcesoCompartido pc = new ProcesoCompartido("pc", procesoLotes);
+		pc.start(); // Ejecuta todos los hilos iniciando los procesos
+		System.out.println("------------------------------------");
 	}
 	
 	/**

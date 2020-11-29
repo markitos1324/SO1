@@ -18,7 +18,6 @@ public abstract class MyThread implements Runnable{
 	@Override
 	public void run() {
 		while (isRunning) {
-			executeTask();
 			synchronized (this) {
 				while (isPause) {
 					try {
@@ -31,20 +30,29 @@ public abstract class MyThread implements Runnable{
 					break;
 				}
 			}
+			executeTask();
 		}
 	}
 
 	public synchronized void stop() {
 		this.isRunning = false;
 	}
-
+	
+	@SuppressWarnings("deprecation")
 	public synchronized void resume() {
-		this.isPause = false;
-		notify();
+//		this.isPause = false;
+		thread.resume();
+//		notify();
 	}
 
+	@SuppressWarnings("deprecation")
 	public synchronized void pause() {
-		this.isPause = true;
+//		this.isPause = true;
+		thread.suspend();
+//		notify();
+	}
+	public boolean isPause() {
+		return isPause;
 	}
 	
 	public void join(){
