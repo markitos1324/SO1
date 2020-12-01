@@ -1,5 +1,7 @@
 package controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import model.ProcesoSerie;
@@ -8,7 +10,7 @@ import model.ProcesoLote;
 import view.MainFrame;
 
 
-public class Controller {
+public class Controller implements ActionListener {
 
 	private ArrayList<ProcesoSerie> procesos;
 	private ArrayList<ProcesoLote> procesoLotes;
@@ -19,7 +21,7 @@ public class Controller {
 	
 	
 	
-	public Controller() {
+	public Controller()  {
 		mainFrame = new MainFrame();
 	
 		procesos = new ArrayList<>();
@@ -175,5 +177,19 @@ public class Controller {
 		}else{
 			return proceso.getTiempoEsperado();
 		}
+	}
+//_______________________________________________________________________________________________________________________________________
+	/*Action performed**/
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		switch (e.getActionCommand()) {
+				
+			
+
+			
+		}
+		
 	}
 }

@@ -17,6 +17,7 @@ public class ProcesoCompartido extends MyThread{
 	/**
 	 * metodo encargado de iniciar todos los parametros principales de los hilos
 	 */
+	
 	@Override
 	void executeTask() {
 		System.out.println("Inicia tiempo compartido");
