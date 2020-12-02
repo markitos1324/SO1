@@ -22,7 +22,7 @@ public class Controller implements ActionListener {
 	
 	
 	public Controller()  {
-		mainFrame = new MainFrame();
+		mainFrame = new MainFrame(this);
 	
 		procesos = new ArrayList<>();
 		procesoLotes = new  ArrayList<>();
@@ -30,13 +30,13 @@ public class Controller implements ActionListener {
 		procesos.add(new ProcesoSerie(60, "lavar","2",new GregorianCalendar(0, 0, 0, 9, 0, 0)));
 		procesos.add(new ProcesoSerie(60, "peinar", "3",new GregorianCalendar(0, 0, 0, 10, 0, 0)));
 		
-		procesoLotes.add(new ProcesoLote("peinar",10));
-		procesoLotes.add(new ProcesoLote("Cocinar",5));
-		procesoLotes.add(new ProcesoLote("lavar",20));
-		procesoLotes.add(new ProcesoLote("tejer",40));
-		procesoLotes.add(new ProcesoLote("colgar",80));
-		procesoLotes.add(new ProcesoLote("minar",160));
-		procesoLotes.add(new ProcesoLote("ver tv",320));
+		procesoLotes.add(new ProcesoLote("peinar",10,this));
+		procesoLotes.add(new ProcesoLote("Cocinar",5,this));
+		procesoLotes.add(new ProcesoLote("lavar",20,this));
+		procesoLotes.add(new ProcesoLote("tejer",40,this));
+		procesoLotes.add(new ProcesoLote("colgar",80,this));
+		procesoLotes.add(new ProcesoLote("minar",160,this));
+		procesoLotes.add(new ProcesoLote("ver tv",320,this));
 		
 //		EjecucionProcesosLoteMono(procesoLotes);
 //		EjecucionProcesosLoteMulti(procesoLotes);
@@ -56,6 +56,9 @@ public class Controller implements ActionListener {
 	}
 	
 	
+
+
+
 	/**
 	 * Metodo encargado de hacer los procesos por lotes(MultiProgramacion) en donde ejecuta
 	 * todos los procesos y va ejecuntando cada uno  mostrando el proceso y
@@ -178,6 +181,18 @@ public class Controller implements ActionListener {
 			return proceso.getTiempoEsperado();
 		}
 	}
+	
+	
+//_________________________________
+
+	public MainFrame getMainFrame() {
+		return mainFrame;
+	}
+
+
+	public void setMainFrame(MainFrame mainFrame) {
+		this.mainFrame = mainFrame;
+	}
 //_______________________________________________________________________________________________________________________________________
 	/*Action performed**/
 
@@ -186,9 +201,11 @@ public class Controller implements ActionListener {
 		
 		switch (e.getActionCommand()) {
 				
-			
-
-			
+		case Constantes.C_MENU_ITEM_MONOMODO:
+			mainFrame.cambiarpanlenesMono();
+			mainFrame.revalidate();
+			mainFrame.repaint();
+			break;
 		}
 		
 	}

@@ -1,5 +1,7 @@
 package model;
 
+import controller.Controller;
+
 public class ProcesoLote extends MyThread{
 
 	private int tiempoDeSueño;
@@ -7,15 +9,19 @@ public class ProcesoLote extends MyThread{
 	private String nombre;
 	private int numeroAcciones;
 	private Boolean seAcabo;
-
+	
 	private Cronometro cronometro;
 	
-	public ProcesoLote(String nombre, int numeroAcciones) {
+	private Controller controller;
+	
+	public ProcesoLote(String nombre, int numeroAcciones,Controller controller) {
 		this.nombre = nombre;
 		this.numeroAcciones = numeroAcciones;
 		this.cronometro = new Cronometro();
 		this.seAcabo = false;
 		this.tiempoDeSueño = 100;
+		this.controller = controller;
+		
 	}
 
 	/**
@@ -27,7 +33,9 @@ public class ProcesoLote extends MyThread{
 			System.out.println("Inicia proceso: " + nombre);
 			cronometro.start(); // Un cronometro para ir teniendo una idea del tiempo que duro
 			for (int i = 0; i < numeroAcciones; i++) {
-				System.out.println("Nombre: " + nombre + ". Accion numero: " + i);
+				System.out.println("Nombre: " + nombre + ". Accion numero: " + i);// grafica 
+				
+				
 				try {
 					Thread.sleep(tiempoDeSueño); // Una pausa para evitar que mi pc lo acabe en 80 milisegundos :'(
 				} catch (InterruptedException e) {

@@ -13,6 +13,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import controller.Constantes;
+import controller.Controller;
 
 
 public class JP_BOTONES extends JPanel {
@@ -23,23 +24,25 @@ public class JP_BOTONES extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JButton botonserie, botonmono, botonmulti, botontiempoCompartido;
 	private static final int NUMERO_FONT = 20;
-	
-	public JP_BOTONES() {
+	private Controller controller;
+	public JP_BOTONES(Controller controller) {
+		this.controller = controller;
 	    setLayout(new GridLayout(1,4));
 	    Border bordejpanel = new TitledBorder(new EtchedBorder(), "Tipos de procesamiento",0, 
 	        		0, new Font("Times New Roman", Font.BOLD, 25), Color.BLACK);
 	    setBorder(bordejpanel);
-	    iniciarCompoenentes();
+	    iniciarCompoenentes(controller);
 	    setVisible(true);
 	}
 	
-	public void iniciarCompoenentes() {
+	public void iniciarCompoenentes(Controller controller) {
 		
 		botonserie = new JButton("Procesamiento en serie");
 		botonserie.setToolTipText("Procesamiento en serie");
 		botonserie.setBorder(new LineBorder(Color.BLACK));
 		//botonserie.addActionListener(controller);
 		botonserie.setActionCommand(Constantes.C_MENU_ITEM_SERIE);
+		
 		botonserie.setBackground(Color.decode("#9FB0BB"));
 		botonserie.setFocusPainted(false);
 		botonserie.setForeground(Color.BLACK);
@@ -51,7 +54,7 @@ public class JP_BOTONES extends JPanel {
 		botonmono = new JButton("Procesamiento lotes: Monomodo");
 		botonmono.setToolTipText("Procesamiento lotes: Monomodo");
 		botonmono.setBorder(new LineBorder(Color.BLACK));
-		//botonmono.addActionListener(controller);
+		botonmono.addActionListener(controller);
 		botonmono.setActionCommand(Constantes.C_MENU_ITEM_MONOMODO);
 		botonmono.setBackground(Color.decode("#9FB0BB"));
 		botonmono.setFocusPainted(false);

@@ -2,10 +2,11 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
@@ -20,22 +21,27 @@ public class JP_MONO extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private JButton procesos;
+	private JProgressBar procesos;
 	private JLabel informacion;
 	private Controller controller;
 	
-	public JP_MONO(Controller controller,int numeroAcciones) {
+	public JP_MONO(Controller controller) {
 		this.controller = controller;
-        setLayout(new BorderLayout());
+        setLayout(new FlowLayout());
         Border bordejpanel = new TitledBorder(new EtchedBorder(), 
         "Procesamiento monoProgramacion",0, 0, new Font("Times New Roman", Font.BOLD, 30), Color.BLACK);
         setBorder(bordejpanel);
-        initComponents(numeroAcciones);
-		
+        setVisible(true);
 	}
 	
-	public void initComponents(int numeroAcciones) {
-		
+	public void initComponents(int numeroAcciones,int actualizacion) {
+		procesos = new JProgressBar(0,100);
+		for (int i = 0; i < numeroAcciones +1 ; i++) {
+			
+			add(procesos);
+			procesos.setValue(i);
+			revalidate();
+			repaint();
+		}
 	}
-
 }
