@@ -5,12 +5,13 @@ import java.util.GregorianCalendar;
 import model.ProcesoSerie;
 import model.ProcesoCompartido;
 import model.ProcesoLote;
+import view.JPSerie;
 import view.MainFrame;
 
 
 public class Controller {
 
-	private ArrayList<ProcesoSerie> procesos;
+	private ArrayList<ProcesoSerie> procesosSerie;
 	private ArrayList<ProcesoLote> procesoLotes;
 	
 	//___________ main frame_______________
@@ -20,13 +21,13 @@ public class Controller {
 	
 	
 	public Controller() {
-		mainFrame = new MainFrame();
+		
 	
-		procesos = new ArrayList<>();
+		procesosSerie = new ArrayList<>();
 		procesoLotes = new  ArrayList<>();
-		procesos.add(new ProcesoSerie(60, "Cocinar","1",new GregorianCalendar(0, 0, 0, 8, 0, 0)));
-		procesos.add(new ProcesoSerie(60, "lavar","2",new GregorianCalendar(0, 0, 0, 9, 0, 0)));
-		procesos.add(new ProcesoSerie(60, "peinar", "3",new GregorianCalendar(0, 0, 0, 10, 0, 0)));
+		procesosSerie.add(new ProcesoSerie(60, "Cocinar","1",new GregorianCalendar(0, 0, 0, 8, 0, 0)));
+		procesosSerie.add(new ProcesoSerie(60, "lavar","2",new GregorianCalendar(0, 0, 0, 9, 0, 0)));
+		procesosSerie.add(new ProcesoSerie(60, "peinar", "3",new GregorianCalendar(0, 0, 0, 10, 0, 0)));
 		
 		procesoLotes.add(new ProcesoLote("peinar",10));
 		procesoLotes.add(new ProcesoLote("Cocinar",5));
@@ -38,17 +39,17 @@ public class Controller {
 		
 //		EjecucionProcesosLoteMono(procesoLotes);
 //		EjecucionProcesosLoteMulti(procesoLotes);
-		EjecucionProcesosTiempoCompartido(procesoLotes);
+//		EjecucionProcesosTiempoCompartido(procesoLotes);
 		
-		/*
+		mainFrame = new MainFrame(procesosSerie);
 		 //ejecucion de procesos en serie.
 		try {
-			EjecucionProcesosSerie(procesos);
+			EjecucionProcesosSerie();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
+		
 
 	
 	}
@@ -132,27 +133,37 @@ public class Controller {
 	 * @param lista de procesos a ejecutar
 	 * @throws InterruptedException
 	 */
-	public void EjecucionProcesosSerie(ArrayList<ProcesoSerie> procesosAñadidos) throws InterruptedException{
+	public void EjecucionProcesosSerie() throws InterruptedException{
 		System.out.println("Ejecutando....");
 		int totalTiempo = 0, totalEstimado = 0;
-		for (ProcesoSerie proceso : procesosAñadidos) {
+		for (ProcesoSerie proceso : procesosSerie) {
 			System.out.println("---------------------------------");
 			System.out.println(proceso.toString());
 			totalEstimado += proceso.getTiempoEsperado();
 			int tiempoGastado = ProbabilidadDeCambio(proceso); //aqui hacemos un calculo para determinar cuanto gasto al final el proceso
+			System.out.println(tiempoGastado+"---"+proceso.getTiempoEsperado());		
 			if (tiempoGastado <= proceso.getTiempoEsperado()) { //Aqui se elige el caso cuando el proceso tarda menos o igual al tiempo esperado
 				Thread.sleep(proceso.getTiempoEsperado()*1000); // apesar de que tarde menos el tiempo de espera seguira siendo el mismo
-				System.out.println( (tiempoGastado < proceso.getTiempoEsperado()) ? "Felicidades el programa gasto menos de lo que debia, el proceso tardo:" + tiempoGastado + " min \nTotal de tiempo Gastado: " + proceso.getTiempoEsperado() + " Min": "Total de tiempo Gastado: " + tiempoGastado + " Min");
+				System.out.println( (tiempoGastado < proceso.getTiempoEsperado()) ? "Felicidades el programa gasto menos de lo que debia, el proceso tardo:" + 
+				tiempoGastado + " min \nTotal de tiempo Gastado: " + proceso.getTiempoEsperado() + " Min": "Total de tiempo Gastado: " 
+						+ tiempoGastado + " Min");
 				totalTiempo += proceso.getTiempoEsperado();
+				proceso.setResultado("<html> <body> Felicidades el programa gasto menos de lo que debia, el proceso tardo:" + 
+								tiempoGastado + " min \nTotal de tiempo Gastado: " + proceso.getTiempoEsperado() + 
+								" Min"+"Total de tiempo Gastado: " 
+										+ tiempoGastado + " Min");
+				mainFrame.jps.updatePanelCenter(procesosSerie);
 			}else { // para el caso en el que tarde mas hay si el tiempo aumenta
 				Thread.sleep(tiempoGastado*1000); // se refleja el aumento de tiempo del proceso
-				System.out.println("El programa demoro mas de lo esperado");
-				System.out.println("Total de tiempo Gastado: " + tiempoGastado + " min");
+				proceso.setResultado("<html> <body>El programa demoro mas de lo esperado<br>" +"Total de tiempo Gastado: " + tiempoGastado + " min<br>");
+				System.out.println("El programa demoro mas de lo esperado<br>" +"Total de tiempo Gastado: " + tiempoGastado + " min");
 				totalTiempo += tiempoGastado;
+				mainFrame.jps.updatePanelCenter(procesosSerie);
 			}
 		}
 		System.out.println("Finalizado....");
-		System.out.println("El tiempo total de ejecucion de los " + procesosAñadidos.size() + " procesos fue de: " + totalTiempo + " Minutos");
+		System.out.println("El tiempo total de ejecucion de los " + procesosSerie.size() +
+				" procesos fue de: " + totalTiempo + " Minutos");
 		System.out.println("El tiempo estimado era de: " + totalEstimado + " minutos");
 	}
 	
