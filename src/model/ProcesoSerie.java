@@ -8,26 +8,23 @@ public class ProcesoSerie {
 	private String nombre;
 	private String turno;
 	private Calendar horaAsignada;
-	private String Resultado;
 	
 	public ProcesoSerie(int tiempoEjecucion, String nombre,String turno, Calendar horaAsignada) {
 		this.tiempoEsperado = tiempoEjecucion;
 		this.nombre = nombre;
 		this.turno = turno;
 		this.horaAsignada = horaAsignada;
-		String hora ="Hora: "+horaAsignada.get(Calendar.HOUR_OF_DAY);
-		String minutos = horaAsignada.get(Calendar.MINUTE) + " Minutos";
-		String completo = hora +":"+ minutos;
-		this.setResultado("<html> <body> Proceso tiempoEsperado= " + tiempoEsperado+ " <br>"  + "turno= " + turno + " <br>"
-				+ "horaAsignada = " + completo);
 	}
 
+	
+	
+	@Override
 	public String toString() {
 		String hora ="Hora: "+horaAsignada.get(Calendar.HOUR_OF_DAY);
 		String minutos = horaAsignada.get(Calendar.MINUTE) + " Minutos";
 		String completo = hora +":"+ minutos;
-		return "<html> <body> Proceso tiempoEsperado= " + tiempoEsperado+ " <br>"  + "turno= " + turno + " <br>"
-				+ "horaAsignada = " + completo ;
+		return "Proceso [tiempoEsperado= " + tiempoEsperado + ", nombre= " + nombre + ", turno= " + turno
+				+ ", horaAsignada= " + completo +"]";
 	}
 
 
@@ -64,17 +61,5 @@ public class ProcesoSerie {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public String getResultado(String resultado) {
-		return resultado;
-	}
-
-	public String getResultado() {
-		return Resultado;
-	}
-
-	public void setResultado(String resultado) {
-		Resultado = resultado;
 	}
 }
