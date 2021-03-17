@@ -22,7 +22,7 @@ public class Controller implements ActionListener {
 	
 	
 	public Controller()  {
-		mainFrame = new MainFrame(this);
+		//mainFrame = new MainFrame(this);
 	
 		procesos = new ArrayList<>();
 		procesoLotes = new  ArrayList<>();
@@ -36,13 +36,13 @@ public class Controller implements ActionListener {
 		procesoLotes.add(new ProcesoLote("tejer",40,this));
 		procesoLotes.add(new ProcesoLote("colgar",80,this));
 		procesoLotes.add(new ProcesoLote("minar",160,this));
-		procesoLotes.add(new ProcesoLote("ver tv",320,this));
+		procesoLotes.add(new ProcesoLote("ver tv",220,this));
 		
-//		EjecucionProcesosLoteMono(procesoLotes);
-//		EjecucionProcesosLoteMulti(procesoLotes);
-		EjecucionProcesosTiempoCompartido(procesoLotes);
+		//EjecucionProcesosLoteMono(procesoLotes);
+	//	EjecucionProcesosLoteMulti(procesoLotes);
+	//	EjecucionProcesosTiempoCompartido(procesoLotes);
 		
-		/*
+	/*	
 		 //ejecucion de procesos en serie.
 		try {
 			EjecucionProcesosSerie(procesos);
@@ -50,9 +50,9 @@ public class Controller implements ActionListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
+		
 
-	
+	*/
 	}
 	
 	
